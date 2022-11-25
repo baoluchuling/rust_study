@@ -10,11 +10,6 @@ pub use initialize::{listener::Listener, route::Route};
 pub use utils::string::StringExtension;
 
 fn main() {
-    let path = [
-        "/".to_string(),
-        "/plus".to_string(),
-        "/?version".to_string()
-    ].to_vec();
 
     let _route_map = StringExtension::split(fs::read_to_string(ROOT_PATH.to_string() + "/assets/route.list").unwrap(), "\n");
 
