@@ -1,9 +1,9 @@
 use std::{fs};
 
+use crate::keys::ROOT_PATH;
+
 use crate::StringExtension;
 use serde::{Serialize, Deserialize};
-
-static _ROOT_PATH: &str = "/Users/admin/Desktop/rust_study/webserver/src";
 
 pub struct Route {
     map: Vec<String>
@@ -34,7 +34,7 @@ impl Route {
         if self.map.contains(_method) {
             if _method == "/" {
                 _status_line = "HTTP/1.1 200 OK\r\n\r\n";
-                _contents = fs::read_to_string(_ROOT_PATH.to_string() + &"/assets/hello.html").unwrap();
+                _contents = fs::read_to_string(ROOT_PATH.to_string() + &"/assets/hello.html").unwrap();
             } else if _method == "/version" {
                 _status_line = "HTTP/1.1 200 OK\r\n\r\n";
                 _contents = "{\"code\": 200, \"message\": \"1.0.0\"}".to_string();
@@ -57,7 +57,7 @@ impl Route {
             }
         } else {
             _status_line = "HTTP/1.1 404 NOT FOUND\r\n\r\n";
-            _contents = fs::read_to_string(_ROOT_PATH.to_string() + &"/assets/404.html").unwrap();
+            _contents = fs::read_to_string(ROOT_PATH.to_string() + &"/assets/404.html").unwrap();
         }
         
         return format!("{_status_line}{_contents}");
