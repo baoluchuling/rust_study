@@ -3,8 +3,6 @@ use std::{net::{TcpListener, TcpStream}, io::{Read, Write}};
 
 use crate::{Route, StringExtension, keys::ROOT_ADDR};
 
-static _ROOT_PATH: &str = "/Users/admin/Desktop/rust_study/webserver/src";
-
 pub struct Listener {
     route: Route
 }
@@ -24,7 +22,7 @@ impl Listener {
             // println!("{:?} says {}", addr, input);
             // Ok(())
 
-        let listener:TcpListener = TcpListener::bind(ROOT_ADDR.to_string() + ":55273").unwrap();
+        let listener:TcpListener = TcpListener::bind(ROOT_ADDR.to_string() + ":8888").unwrap();
         let port = listener.local_addr();
         println!("Listening on {}, access this port to end the program", port.unwrap());
 

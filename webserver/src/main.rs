@@ -13,7 +13,7 @@ fn main() {
 
     let _route_map = StringExtension::split(fs::read_to_string(ROOT_PATH.to_string() + "/assets/route.list").unwrap(), "\n");
 
-    let route = Route::new(path);
+    let route = Route::new(_route_map);
 
     let mut listener: Listener = Listener::new(route);
 
