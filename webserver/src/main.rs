@@ -1,6 +1,6 @@
 mod initialize;
-mod utils;
 mod keys;
+mod utils;
 
 use std::fs;
 
@@ -10,7 +10,6 @@ pub use initialize::{listener::Listener, route::Route};
 pub use utils::string::StringExtension;
 
 fn main() {
-
     // get route list
     let result = fs::read_to_string(ROOT_PATH.to_string() + "/assets/route.list");
     if result.is_err() {
@@ -18,7 +17,10 @@ fn main() {
         return;
     }
 
-    let _route_map = StringExtension::split(fs::read_to_string(ROOT_PATH.to_string() + "/assets/route.list").unwrap(), "\n");
+    let _route_map = StringExtension::split(
+        fs::read_to_string(ROOT_PATH.to_string() + "/assets/route.list").unwrap(),
+        "\n",
+    );
 
     let route = Route::new(_route_map);
 
