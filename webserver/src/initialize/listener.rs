@@ -15,14 +15,14 @@ impl Listener {
     }
 
     pub fn run(&mut self) {
-            // let (mut tcp_stream, addr) = listener.accept()?; // 阻塞，直到被请求
+            // let (mut tcp_stream, addr) = listener.accept()?;  // blocks until a connection is established
             // println!("Connection received! {:?} is sending data.", addr);
             // let mut input = String::new();
             // let _ = tcp_stream.read_to_string(&mut input)?;
             // println!("{:?} says {}", addr, input);
             // Ok(())
 
-        let listener:TcpListener = TcpListener::bind(ROOT_ADDR.to_string() + ":8888").unwrap();
+        let listener:TcpListener = TcpListener::bind(ROOT_ADDR.to_string() + ":3001").unwrap();
         let port = listener.local_addr();
         println!("Listening on {}, access this port to end the program", port.unwrap());
 
@@ -33,7 +33,7 @@ impl Listener {
         }
     }
 
-    // 接口监听回调
+    // listen to the connection and handle it
     fn handle_connection(&mut self, mut stream: TcpStream) {
 
         let request_infos: Vec<String> = Self::parse_request(&stream);

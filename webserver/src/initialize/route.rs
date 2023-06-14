@@ -30,15 +30,17 @@ impl Route {
 
         let _method = &paths[0];
         let _param_str = if paths.len() > 1 { &paths[1] } else { "{}"};
+
+        print!("{} {}", _method, _param_str);
         
         if self.map.contains(_method) {
             if _method == "/" {
                 _status_line = "HTTP/1.1 200 OK\r\n\r\n";
                 _contents = fs::read_to_string(ROOT_PATH.to_string() + &"/assets/hello.html").unwrap();
-            } else if _method == "/version" {
+            } else if _method == "/version/" || _method == "/version" {
                 _status_line = "HTTP/1.1 200 OK\r\n\r\n";
                 _contents = "{\"code\": 200, \"message\": \"1.0.0\"}".to_string();
-            } else if _method == "/plus" {
+            } else if _method == "/plus/" || _method == "/plus" {
                 let _param_list_str = StringExtension::split(_param_str.to_string(), "&");
         
                 let mut json = "".to_string();
@@ -53,7 +55,7 @@ impl Route {
                 let deserialized: Point = serde_json::from_str(&json).unwrap();
                 
                 _status_line = "HTTP/1.1 200 OK\r\n\r\n";
-                _contents = ("{\"code\": 200, \"data\": ".to_string() + &(deserialized.a * deserialized.b).to_string() + ", \"message\": \"ok\"}").to_string();
+                _contents = ("{\"code\": 200, \"data\": ".to_string() + &(deserialized.a + deserialized.b).to_string() + ", \"message\": \"ok\"}").to_string();
             }
         } else {
             _status_line = "HTTP/1.1 404 NOT FOUND\r\n\r\n";
